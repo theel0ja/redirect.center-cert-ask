@@ -1,0 +1,18 @@
+{
+	admin off
+
+	on_demand_tls {
+		ask https://certask.lelux.fi/?base=redirect.lelux.fi
+	}
+}
+
+:443 {
+	bind 192.0.2.10 2001:db8::10
+
+	# redirect.center backend
+	reverse_proxy 127.0.0.1:3000
+
+	tls {
+		on_demand
+	}
+}
