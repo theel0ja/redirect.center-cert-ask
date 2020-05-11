@@ -16,15 +16,14 @@ $doh_base = "https://resolver-eu.lelux.fi/dns-query";
 $domain = $_GET["domain"];
 $base = $_GET["base"];
 
-if($domain == $base) {
-    http_response_code(200);
-    die("Domain same as base");
-}
-    
-
 if(empty($domain) || empty($base)) {
     http_response_code(400);
     die("domain or base missing");
+}
+
+if($domain == $base) {
+    http_response_code(200);
+    die("Domain same as base");
 }
 
 function createDoh($domain) {
