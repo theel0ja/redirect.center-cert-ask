@@ -21,14 +21,14 @@ if(empty($domain) || empty($base)) {
     die("domain or base missing");
 }
 
-if(endsWith($domain, $base)) {
-    http_response_code(400);
-    die("Domain ends with base");
-}
-
 if($domain == $base) {
     http_response_code(200);
     die("Domain same as base");
+}
+
+if(endsWith($domain, $base)) {
+    http_response_code(400);
+    die("Domain ends with base");
 }
 
 function createDoh($domain) {
