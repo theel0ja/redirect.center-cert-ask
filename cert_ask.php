@@ -11,7 +11,7 @@ function endsWith($haystack, $needle)
     return (substr($haystack, -$length) === $needle);
 }
 
-$doh_base = "https://resolver-eu.lelux.fi/dns-query";
+$doh_base = "https://api.telcodb.net/dns-query";
 
 $domain = $_GET["domain"];
 $base = $_GET["base"];
@@ -19,6 +19,11 @@ $base = $_GET["base"];
 if(empty($domain) || empty($base)) {
     http_response_code(400);
     die("domain or base missing");
+}
+
+if(endsWith($domain, $base)) {
+    http_response_code(400);
+    die("Domain ends with base");
 }
 
 if($domain == $base) {
